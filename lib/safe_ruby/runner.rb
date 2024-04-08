@@ -39,7 +39,7 @@ class SafeRuby
 
     data = read.read
     begin
-      Marshal.load(data)
+      YAML.load(data)
     rescue => e
       if @raise_errors
         raise data
@@ -61,7 +61,7 @@ class SafeRuby
     file.write(MAKE_SAFE_CODE)
     file.write <<-STRING
       result = eval(%q(#{@code}))
-      print Marshal.dump(result)
+      print YAML.dump(result)
     STRING
     file.rewind
     file
